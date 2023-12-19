@@ -77,8 +77,19 @@ h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(39, 183, 245, 0.3);
+    background-color: rgba(0, 255, 66, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
+    font-size: 6rem;
+    flex-direction: column;
+}
+
+.winning-message button {
+    font-size: 3rem;
+    background-color: white;
+    border: black;
+    padding: .30em .6em;
+    cursor: pointer;
 }
