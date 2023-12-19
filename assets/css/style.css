@@ -26,6 +26,26 @@ body {
 .cell {
     width: var(--cell-size);
     height: var(--cell-size);
-    background-color: chartreuse;
     border: 1px solid black;
+}
+
+/* Removing the border from the outside */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n+3) {
+    border-right: none;
+}
+
+.cell:nth-child(3n+1) {
+    border-left: none;
+}
+
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8) {
+    border-bottom: none;
 }
