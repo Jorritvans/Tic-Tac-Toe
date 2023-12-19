@@ -72,13 +72,13 @@ h1 {
 /* winning message and reset button */
 
 .winning-message {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: rgba(0, 255, 66, 0.3);
-    display: flex;
     justify-content: center;
     align-items: center;
     color: white;
@@ -92,4 +92,8 @@ h1 {
     border: black;
     padding: .30em .6em;
     cursor: pointer;
+}
+
+.winning-message.show {
+    display: flex;
 }
