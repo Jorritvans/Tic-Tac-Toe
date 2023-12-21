@@ -81,9 +81,16 @@ h1 {
     cursor: not-allowed;
 }
 
+/* adding a hover effect */
+.gameboard.X .cell:hover {
+    
+}
+
 /* making the X */
 .cell.X::before,
-.cell.X::after {
+.cell.X::after,
+.gameboard.X .cell:hover::before,
+.gameboard.X .cell:hover::after {
     content: '';
     position: absolute;
     width: calc(var(--mark-size) * .20);
@@ -93,11 +100,13 @@ h1 {
 
 /* rotating the L's created to make an 'X'*/
 
-.cell.X::before {
+.cell.X::before,
+.gameboard.X .cell:hover::before {
     transform: rotate(45deg);
 }
 
-.cell.X::after {
+.cell.X::after,
+.gameboard.X .cell:hover::after {
     transform: rotate(-45deg);
 }
 
