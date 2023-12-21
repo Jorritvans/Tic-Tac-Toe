@@ -94,6 +94,17 @@ h1 {
     transform: rotate(-45deg);
 }
 
+/* Creating the O */
+
+.cell.O::before,
+.cell.O::after {
+    content: '';
+    position: absolute;
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background-color: blue;
+}
+
 /* winning message and reset button */
 
 .winning-message {
