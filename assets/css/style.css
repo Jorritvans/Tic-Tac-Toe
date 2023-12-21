@@ -81,9 +81,16 @@ h1 {
     cursor: not-allowed;
 }
 
+.cell.X::before,
+.cell.X::after {
+    background-color: green;
+}
+
+
 /* adding a hover effect */
-.gameboard.X .cell:hover {
-    
+.gameboard.X .cell:not(.X):not(.O):hover::before,
+.gameboard.X .cell:not(.X):not(.O):hover::after {
+    background-color: lightgreen;
 }
 
 /* making the X */
@@ -95,7 +102,6 @@ h1 {
     position: absolute;
     width: calc(var(--mark-size) * .20);
     height: var(--mark-size);
-    background-color: green;
 }
 
 /* rotating the L's created to make an 'X'*/
