@@ -104,7 +104,10 @@ h1 {
     background-color: blue;
 }
 
-
+.cell.O::before{
+width: var(--mark-size);
+height: var(--mark-size);
+}
 
 /* winning message and reset button */
 
