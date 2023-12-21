@@ -111,7 +111,7 @@ background-color: blue;
 
 .cell.O::after {
     width: calc(var(--mark-size) * .7);
-    height: var(--mark-size);
+    height: calc(var(--mark-size) *.7);
     background-color: white;
 }
 
