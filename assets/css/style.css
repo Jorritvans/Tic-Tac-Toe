@@ -113,19 +113,23 @@ h1 {
 /* Creating the O */
 
 .cell.O::before,
-.cell.O::after {
+.cell.O::after, 
+.gameboard.O .cell:not(.X):not(.O):hover::before,
+.gameboard.O .cell:not(.X):not(.O):hover::after {
     content: '';
     position: absolute;
     border-radius: 60%;
 }
 
-.cell.O::before{
+.cell.O::before, 
+.gameboard.O .cell:not(.X):not(.O):hover::before {
     width: var(--mark-size);
     height: var(--mark-size);
     background-color: blue;
 }
 
-.cell.O::after {
+.cell.O::after,
+.gameboard.O .cell:not(.X):not(.O):hover::after {
     width: calc(var(--mark-size) * .7);
     height: calc(var(--mark-size) *.7);
     background-color: white;
