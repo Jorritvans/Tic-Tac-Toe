@@ -100,10 +100,11 @@ h1 {
 .cell.O::after {
     content: '';
     position: absolute;
-    width: var(--mark-size);
-    height: var(--mark-size);
+    border-radius: 50%;
     background-color: blue;
 }
+
+
 
 /* winning message and reset button */
 
