@@ -50,6 +50,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 /* Removing the border from the outside */
@@ -77,6 +78,7 @@ h1 {
 .cell.X::before,
 .cell.X::after {
     content: '';
+    position: absolute;
     width: calc(var(--mark-size) * .20);
     height: var(--mark-size);
     background-color: green;
