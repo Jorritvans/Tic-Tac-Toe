@@ -119,6 +119,17 @@ h1 {
 /* Creating the O */
 
 .cell.O::before,
+.cell.O::after {
+    background-color: blue;
+}
+
+/* adding the hover effect to O */
+.gameboard.O .cell:not(.X):not(.O):hover::before,
+.gameboard.O .cell:not(.X):not(.O):hover::after {
+    background-color: lightblue;
+}
+
+.cell.O::before,
 .cell.O::after, 
 .gameboard.O .cell:not(.X):not(.O):hover::before,
 .gameboard.O .cell:not(.X):not(.O):hover::after {
@@ -131,7 +142,6 @@ h1 {
 .gameboard.O .cell:not(.X):not(.O):hover::before {
     width: var(--mark-size);
     height: var(--mark-size);
-    background-color: blue;
 }
 
 .cell.O::after,
