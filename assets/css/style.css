@@ -73,12 +73,23 @@ h1 {
     border-bottom: none;
 }
 
+/* making the X */
 .cell.X::before,
 .cell.X::after {
     content: '';
     width: calc(var(--mark-size) * .20);
     height: var(--mark-size);
     background-color: green;
+}
+
+/* rotating the L's created to make an 'X'*/
+
+.cell.X::before {
+    transform: rotate(45deg);
+}
+
+.cell.X::after {
+    transform: rotate(-45deg);
 }
 
 /* winning message and reset button */
