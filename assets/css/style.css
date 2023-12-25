@@ -171,9 +171,15 @@ h1 {
 .winning-message button {
     font-size: 3rem;
     background-color: white;
-    border: black;
+    border: 1px solid black;
     padding: .30em .6em;
     cursor: pointer;
+}
+
+.winning-message button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
 }
 
 .winning-message.show {
