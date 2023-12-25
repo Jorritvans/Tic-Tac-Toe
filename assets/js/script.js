@@ -11,7 +11,9 @@ const WINNING_COMBINATIONS = [
    [2, 4, 6]
 ]
 const cellElements = document.querySelectorAll('[data-cell]')
-const gameBoard = document.getElementById('gameboard')
+const board = document.getElementById('gameboard')
+const winningMessageElement = document.getElementById('winningMessage');
+const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 let OTurn
 
 startGame()
@@ -19,9 +21,13 @@ startGame()
 function startGame () {
     OTurn = false
     cellElements.forEach(cell => {
+        cell.classList.remove(X_CLASS);
+        cell.classList.remove(O_CLASS);
+        cell.removeEventListener('click', handleClick);
         cell.addEventListener('click', handleClick, { once: true });
-    })
-    setGameBoardHoverClass()
+        setBoardHoverClass()
+        winningMessageElement.classList.remove('show')
+    })  
 }
 
 function handleClick(e) {
@@ -29,10 +35,29 @@ function handleClick(e) {
     const currentClass = OTurn ? O_CLASS : X_CLASS
     placeMark(cell, currentClass)
     if (checkWin(currentClass)) {
-        console.log('winner')
-    }
+        endGame(false)
+    } else if (isDraw()) {
+        endGame(true)
+    } else {
     swapTurns()
-    setGameBoardHoverClass()
+    setBoardHoverClass()
+    }
+}
+
+function endGame(draw) {
+    if (draw) {
+        winningMessageTextElement.innerText = 'Draw!'
+    } else {
+        winningMessageTextElement.innerText = `${OTurn ? "O's" : "X's"} Wins!`
+    }
+    winningMessageTextElement.classList.add('show')
+}
+
+function isDraw() {
+    return [...cellElements].every(cell => {
+        return cell.classList.contains(X_CLASS) ||
+        cell.classList.contains(O_CLASS)
+    })
 }
 
 function placeMark(cell, currentClass) {
@@ -43,13 +68,13 @@ function swapTurns() {
     OTurn = !OTurn 
 }
 
-function setGameBoardHoverClass() {
-    gameBoard.classList.remove(X_CLASS)
-    gameBoard.classList.remove(O_CLASS)
+function setBoardHoverClass() {
+    board.classList.remove(X_CLASS)
+    board.classList.remove(O_CLASS)
     if (OTurn) {
-        gameBoard.classlist.add(O_CLASS)
+        board.classList.add(O_CLASS)
     } else {
-        gameBoard.classList.add(X_CLASS)
+        board.classList.add(X_CLASS)
     }
 }
 
