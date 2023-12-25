@@ -12,11 +12,13 @@ const WINNING_COMBINATIONS = [
 ]
 const cellElements = document.querySelectorAll('[data-cell]')
 const board = document.getElementById('gameboard')
-const winningMessageElement = document.getElementById('winningMessage');
+const winningMessageElement = document.getElementById('winningMessage')
+const resetButton = document.getElementById('resetButton')
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 let OTurn
 
 startGame()
+resetButton.addEventListener('click', startGame)
 
 function startGame () {
     OTurn = false
