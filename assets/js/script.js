@@ -11,8 +11,13 @@ function handleClick(e) {
     const cell = e.target
     const currentClass = OTurn ? O_CLASS : X_CLASS
     placeMark(cell, currentClass)
+    swapTurns()
 }
 
 function placeMark(cell, currentClass) {
     cell.classList.add(currentClass)
+}
+
+function swapTurns() {
+    OTurn = !OTurn 
 }
