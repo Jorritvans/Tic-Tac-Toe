@@ -119,9 +119,13 @@ function swapTurns() {
 
 function setBoardHoverClass() {
     board.classList.remove(X_CLASS, O_CLASS);
-    board.classList.add(OTurn ? O_CLASS : X_CLASS);
-}
 
+    if (OTurn) {
+        board.classList.add(X_CLASS);
+    } else {
+        board.classList.add(O_CLASS);
+    }
+}
 function checkWin(currentClass) {
     return WINNING_COMBINATIONS.some(combination => {
         return combination.every(index => {
