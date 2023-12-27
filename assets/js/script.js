@@ -19,8 +19,6 @@ let OTurn;
 
 startGame();
 
-restartButton.addEventListener('click', startGame);
-
 function startGame() {
     OTurn = false;
     cellElements.forEach(cell => {
@@ -30,8 +28,9 @@ function startGame() {
         cell.addEventListener('click', handleClick, { once: true });
     });
     setBoardHoverClass();
-    winningMessageElement.classList.remove('show');
+    winningMessageElement.classList.remove("show");
 }
+
 
 function handleClick(e) {
     const cell = e.target;
@@ -53,7 +52,7 @@ function endGame(draw) {
     } else {
         winningMessageTextElement.innerText = `${OTurn ? "O's" : "X's"} Wins!`;
     }
-    winningMessageTextElement.classList.add('show');
+    winningMessageTextElement.classList.add("show");
 }
 
 function isDraw() {
@@ -72,13 +71,8 @@ function swapTurns() {
 }
 
 function setBoardHoverClass() {
-    board.classList.remove(X_CLASS);
-    board.classList.remove(O_CLASS);
-    if (OTurn) {
-        board.classList.add(O_CLASS);
-    } else {
-        board.classList.add(X_CLASS);
-    }
+    board.classList.remove(X_CLASS, O_CLASS);
+    board.classList.add(OTurn ? O_CLASS : X_CLASS);
 }
 
 function checkWin(currentClass) {
@@ -88,3 +82,5 @@ function checkWin(currentClass) {
         });
     });
 }
+
+restartButton.addEventListener('click', startGame);
