@@ -15,9 +15,11 @@ const board = document.getElementById('gameboard');
 const winningMessageElement = document.getElementById('winningMessage');
 const restartButton = document.getElementById('restartButton');
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]');
-let OTurn = false;
+let OTurn;
 
 startGame();
+
+restartButton.addEventListener('click', startGame);
 
 function startGame() {
     OTurn = false;
@@ -63,25 +65,6 @@ function computerMove() {
     }
 }
 
-
-function handleClick(e) {
-    const cell = e.target;
-    const currentClass = OTurn ? O_CLASS : X_CLASS;
-    placeMark(cell, currentClass);
-    if (checkWin(currentClass)) {
-        endGame(false);
-    } else if (isDraw()) {
-        endGame(true);
-    } else {
-        swapTurns();
-        setBoardHoverClass();
-
-        if (!OTurn) {
-            setTimeout(computerMove, 600);
-        }
-    }
-}
-
 function findWinningMove(a, b, c, playerClass) {
     const elements = [cellElements[a], cellElements[b], cellElements[c]];
 
@@ -92,6 +75,24 @@ function findWinningMove(a, b, c, playerClass) {
 
     return undefined;
 }
+
+function handleClick(e) {
+    const cell = e.target;
+    placeMark(cell, currentClass);
+    if (checkWin(currentClass)) {
+        endGame(false);
+    } else if (isDraw()) {
+        endGame(true);
+    } else {
+        swapTurns();
+        setBoardHoverClass();
+
+        if (!OTurn) {
+            setTimeout(computerMove, 800);
+        }
+    }
+}
+
 
 function endGame(draw) {
     if (draw) {
@@ -133,5 +134,3 @@ function checkWin(currentClass) {
         });
     });
 }
-
-restartButton.addEventListener('click', startGame);
