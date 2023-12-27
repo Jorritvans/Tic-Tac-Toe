@@ -29,6 +29,9 @@ function startGame() {
     });
     setBoardHoverClass();
     winningMessageElement.classList.remove("show");
+    if (!OTurn) {
+        computerMove();
+    }
 }
 
 function computerMove() {
