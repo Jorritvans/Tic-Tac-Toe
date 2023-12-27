@@ -78,8 +78,8 @@ function findWinningMove(a, b, c, playerClass) {
 
 function handleClick(e) {
     const cell = e.target;
-    placeMark(cell, currentClass);
-    if (checkWin(currentClass)) {
+    placeMark(cell, X_CLASS);
+    if (checkWin(X_CLASS)) {
         endGame(false);
     } else if (isDraw()) {
         endGame(true);
