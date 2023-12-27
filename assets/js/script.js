@@ -37,13 +37,29 @@ function startGame() {
 function computerMove() {
     const availableCells = [...cellElements].filter(cell => !cell.classList.contains(X_CLASS) && !cell.classList.contains(O_CLASS));
 
+    
     for (const combination of WINNING_COMBINATIONS) {
         const [a, b, c] = combination;
         const winningMove = findWinningMove(a, b, c, O_CLASS);
-    if (winningMove !== undefined && availableCells.includes(winningMove)) {
-        placeMark(winningMove, O_CLASS);
+        if (winningMove !== undefined && availableCells.includes(winningMove)) {
+            placeMark(winningMove, O_CLASS);
+            endGame(false);
+            return;
+        }
+    }
+
+    
+    const randomIndex = Math.floor(Math.random() * availableCells.length);
+    const computerCell = availableCells[randomIndex];
+    placeMark(computerCell, O_CLASS);
+
+    if (checkWin(O_CLASS)) {
         endGame(false);
-        return;
+    } else if (isDraw()) {
+        endGame(true);
+    } else {
+        swapTurns();
+        setBoardHoverClass();
     }
 }
 
