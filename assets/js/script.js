@@ -15,7 +15,7 @@ const board = document.getElementById('gameboard');
 const winningMessageElement = document.getElementById('winningMessage');
 const restartButton = document.getElementById('restartButton');
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]');
-let OTurn;
+let OTurn = false;
 
 startGame();
 
@@ -31,6 +31,22 @@ function startGame() {
     winningMessageElement.classList.remove("show");
 }
 
+function computerMove() {
+    const availableCells = [...cellElements].filter(cell => !cell.classList.contains(X_CLASS) && !cell.classList.contains(O_CLASS));
+    const randomIndex = Math.floor(Math.random() * availableCells.length);
+    const computerCell = availableCells[randomIndex];
+    placeMark(computerCell, O_CLASS);
+
+    if (checkWin(O_CLASS)) {
+        endGame(false);
+    } else if (isDraw()) {
+        endGame(true);
+    } else {
+        swapTurns();
+        setBoardHoverClass();
+    }
+}
+
 
 function handleClick(e) {
     const cell = e.target;
@@ -43,6 +59,10 @@ function handleClick(e) {
     } else {
         swapTurns();
         setBoardHoverClass();
+
+        if (!OTurn) {
+            setTimeout(computerMove, 600);
+        }
     }
 }
 
