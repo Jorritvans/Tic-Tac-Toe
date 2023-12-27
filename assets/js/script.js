@@ -12,9 +12,6 @@ const WINNING_COMBINATIONS = [
 ];
 const cellElements = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('gameboard');
-const winningMessageElement = document.getElementById('winningMessage');
-const restartButton = document.getElementById('restartButton');
-const winningMessageTextElement = document.querySelector('[data-winning-message-text]');
 let OTurn;
 
 startGame();
@@ -30,7 +27,6 @@ function startGame() {
         cell.addEventListener('click', handleClick, { once: true });
     });
     setBoardHoverClass();
-    winningMessageElement.classList.remove("show");
     if (!OTurn) {
         computerMove();
     }
@@ -95,12 +91,7 @@ function handleClick(e) {
 
 
 function endGame(draw) {
-    if (draw) {
-        winningMessageTextElement.innerText = 'Draw!';
-    } else {
-        winningMessageTextElement.innerText = `${OTurn ? "O's" : "X's"} Wins!`;
-    }
-    winningMessageTextElement.classList.add("show");
+
 }
 
 function isDraw() {
