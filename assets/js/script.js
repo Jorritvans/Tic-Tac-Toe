@@ -12,9 +12,8 @@ const WINNING_COMBINATIONS = [
 ];
 const cellElements = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('gameboard');
-document.getElementById('startGameBtn').addEventListener('click', startGame);
-document.getElementById('restartBtn').addEventListener('click', restartGame);
-document.getElementById('restartNotificationBtn').addEventListener('click', restartGame);
+const restartBtn = document.getElementById('restaartBtn');
+const modeSelect = document.getElementById('gameMode');
 let OTurn;
 
 startGame();
@@ -29,7 +28,9 @@ function startGame() {
     });
     setBoardHoverClass();
     if (!OTurn) {
+        if (mode.Select.value 000'playerVsComputer') {
         computerMove();
+        }
     }
 }
 
@@ -84,7 +85,7 @@ function handleClick(e) {
         swapTurns();
         setBoardHoverClass();
 
-        if (!OTurn) {
+        if (!OTurn && modeSelect.value === 'playerVsComputer') {
             setTimeout(computerMove, 800);
         }
     }
@@ -123,4 +124,26 @@ function checkWin(currentClass) {
             return cellElements[index].classList.contains(currentClass);
         });
     });
+}
+
+
+function handleStartGame() {
+    const selectedMode = document.getElementById('gameMode').value;
+    if (selectedMode === 'playerVsComputer') {
+        startGame();
+        computerMove();
+    } else if (selectedMode === 'playerVsPlayer') {
+        startGame();
+    }
+}
+
+function handleRestart() {
+    document.getElementById('notification').classList.add('hidden');
+    document.getElementById('info').classList.remove('hidden');
+    document.getElementById('options').classList.remove('hidden');
+    startGame();
+    const selectedMode = document.getElementById('gameMode').value;
+    if(selectedMode === 'playerVsComputer') {
+        computerMove();
+    }
 }
