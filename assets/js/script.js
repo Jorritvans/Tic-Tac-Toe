@@ -12,6 +12,9 @@ const WINNING_COMBINATIONS = [
 ];
 const cellElements = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('gameboard');
+document.getElementById('startGameBtn').addEventListener('click', startGame);
+document.getElementById('restartBtn').addEventListener('click', restartGame);
+document.getElementById('restartNotificationBtn').addEventListener('click', restartGame);
 let OTurn;
 
 startGame();

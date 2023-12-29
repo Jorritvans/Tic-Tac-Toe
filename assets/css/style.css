@@ -29,16 +29,10 @@ h1 {
 
 /* Making the board */
 .gameboard {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
     display: grid;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    justify-content: center;
-    align-content: center;
     grid-template-columns: repeat(3, auto);
 }
 
@@ -145,4 +139,46 @@ h1 {
     width: calc(var(--mark-size) * .7);
     height: calc(var(--mark-size) *.7);
     background-color: white;
+}
+
+/* styles for the notification */
+#notification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid black;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#notification.hidden {
+    display: none;
+}
+
+/* styles for the buttons and option menu */
+
+.options {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#startGameBtn,
+#restartBtn,
+#restartNotificationBtn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#resultMessage {
+    font-size: 18px;
+    margin-bottom: 10px;
 }
