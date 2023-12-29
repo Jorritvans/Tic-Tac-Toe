@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,7 @@
     <!-- Meta tags for search engine -->
     <meta name="description"
         content="TIC TAC TOE, game played by people any age and enjoyed by millions if not billions of people!">
-    <meta name="keywords"
-        content="TIC TAC TOE, games, 1v1, competitive, enjoyable game, easy game, strategy, skill">
+    <meta name="keywords" content="TIC TAC TOE, games, 1v1, competitive, enjoyable game, easy game, strategy, skill">
     <!-- Google fonts and Fontawesome link -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -17,18 +17,36 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Tic-Tac-Toe</title>
 </head>
+
 <body>
-    <div><h1>TIC TAC TOE</h1>
-    <p id="info">
-        Game starts by tapping on one of the boxes after the bot has placed their move!
-        <br><br> **IMPORTANT** 
-        <br><br>MAKE SURE THE BOT HAS PLACED THE O BEFORE YOU PLACE YOUR FIRST MOVE!
-        <br><br>The computer starts as
-        <b>Player O </b>And Second Player as
-        <b>Player X</b>
-    </p>
-    <br><br>
+    <div>
+        <h1>TIC TAC TOE</h1>
+        <p id="info">
+            Game starts by tapping on one of the boxes after the bot has placed their move!
+            <br><br> **IMPORTANT**
+            <br><br>MAKE SURE THE BOT HAS PLACED THE O BEFORE YOU PLACE YOUR FIRST MOVE!
+            <br><br>The computer starts as
+            <b>Player O </b>And Second Player as
+            <b>Player X</b>
+        </p>
+        <br><br>
     </div>
+
+    <div class="options" id="options">
+        <label for="gameMode">Choose Game Mode:</label>
+        <select id="gameMode" name="gameMode">
+            <option value="playerVsComputer">Play against the Computer</option>
+            <option value="playerVsPlayer">Play against your friend!</option>
+        </select>
+        <button id="startGameBtn">Start Game</button>
+        <button id="retartBtn">Restart Game</button>
+    </div>
+
+    <div id="notification" class="hidden">
+        <p id="resultMessage"></p>
+        <button id="restartNotificationBtn">Restart Game</button>
+    </div>
+
     <div class="gameboard" id="gameboard">
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
@@ -40,7 +58,9 @@
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
     </div>
+
     <!-- JS link-->
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>

@@ -2,18 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 /* box and cell sizing */
-
-*, *::after, *::before {
+*,
+*::after,
+*::before {
     box-sizing: border-box;
 }
 
 :root {
-    --cell-size:100px;
+    --cell-size: 100px;
     --mark-size: calc(var(--cell-size) * .8);
 }
 
 /* basic css */
-
 body {
     margin: 0;
 }
@@ -28,7 +28,6 @@ h1 {
 }
 
 /* Making the board */
-
 .gameboard {
     width: 100vw;
     height: 100vh;
@@ -40,7 +39,7 @@ h1 {
     bottom: 0;
     justify-content: center;
     align-content: center;
-    grid-template-columns: repeat(3,auto);
+    grid-template-columns: repeat(3, auto);
 }
 
 .cell {
@@ -86,7 +85,6 @@ h1 {
     background-color: green;
 }
 
-
 /* adding a hover effect */
 .gameboard.X .cell:not(.X):not(.O):hover::before,
 .gameboard.X .cell:not(.X):not(.O):hover::after {
@@ -105,7 +103,6 @@ h1 {
 }
 
 /* rotating the L's created to make an 'X'*/
-
 .cell.X::before,
 .gameboard.X .cell:not(.X):not(.O):hover::before {
     transform: rotate(45deg);
@@ -117,7 +114,6 @@ h1 {
 }
 
 /* Creating the O */
-
 .cell.O::before,
 .cell.O::after {
     background-color: blue;
@@ -130,7 +126,7 @@ h1 {
 }
 
 .cell.O::before,
-.cell.O::after, 
+.cell.O::after,
 .gameboard.O .cell:not(.X):not(.O):hover::before,
 .gameboard.O .cell:not(.X):not(.O):hover::after {
     content: '';
@@ -138,7 +134,7 @@ h1 {
     border-radius: 60%;
 }
 
-.cell.O::before, 
+.cell.O::before,
 .gameboard.O .cell:not(.X):not(.O):hover::before {
     width: var(--mark-size);
     height: var(--mark-size);

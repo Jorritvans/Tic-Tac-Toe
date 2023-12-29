@@ -16,8 +16,6 @@ let OTurn;
 
 startGame();
 
-restartButton.addEventListener('click', startGame);
-
 function startGame() {
     OTurn = false;
     cellElements.forEach(cell => {
@@ -91,13 +89,11 @@ function handleClick(e) {
 
 
 function endGame(draw) {
-
 }
 
 function isDraw() {
     return [...cellElements].every(cell => {
-        return cell.classList.contains(X_CLASS) ||
-            cell.classList.contains(O_CLASS);
+        return cell.classList.contains(X_CLASS) && cell.classList.contains(O_CLASS);
     });
 }
 
