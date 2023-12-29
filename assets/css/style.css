@@ -29,10 +29,12 @@ h1 {
 
 /* Making the board */
 .gameboard {
-    width: 100%;
     max-width: 600px;
     margin: 20px auto;
     display: grid;
+    position: fixed;
+    justify-content: center;
+    align-content: center;
     grid-template-columns: repeat(3, auto);
 }
 

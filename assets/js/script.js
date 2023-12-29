@@ -12,7 +12,7 @@ const WINNING_COMBINATIONS = [
 ];
 const cellElements = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('gameboard');
-const restartBtn = document.getElementById('restaartBtn');
+const restartBtn = document.getElementById('restartBtn');
 const modeSelect = document.getElementById('gameMode');
 let OTurn;
 
@@ -28,7 +28,7 @@ function startGame() {
     });
     setBoardHoverClass();
     if (!OTurn) {
-        if (mode.Select.value 000'playerVsComputer') {
+        if (modeSelect.value === 'playerVsComputer') {
         computerMove();
         }
     }
@@ -93,6 +93,15 @@ function handleClick(e) {
 
 
 function endGame(draw) {
+    const resultMessage = document.getElementById('resultMessage');
+    if (draw) {
+        resultMessage.textContent = 'The game is a draw!';
+    } else {
+        resultMessage.textContent = OTurn ? 'Player X has won!' : 'Player O has won!';
+    }
+    document.getElementById('notification').classList.remove('hidden');
+    document.getElementById('info').classList.add('hidden');
+    document.getElementById('options').classList.add('hidden');
 }
 
 function isDraw() {
@@ -118,6 +127,7 @@ function setBoardHoverClass() {
         board.classList.add(O_CLASS);
     }
 }
+
 function checkWin(currentClass) {
     return WINNING_COMBINATIONS.some(combination => {
         return combination.every(index => {
@@ -126,6 +136,17 @@ function checkWin(currentClass) {
     });
 }
 
+restartBtn.addEventListener('click', () => {
+    startGame();
+});
+
+document.getElementById('restartNotificationBtn').addEventListener('click', handleRestart);
+
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        handleRestart();
+    }
+});
 
 function handleStartGame() {
     const selectedMode = document.getElementById('gameMode').value;
