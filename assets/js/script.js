@@ -15,6 +15,8 @@ const board = document.getElementById('gameboard');
 const restartBtn = document.getElementById('restartBtn');
 const modeSelect = document.getElementById('gameMode');
 let OTurn;
+let computerMoveTimeout;
+let firstMoveMade = false;
 
 startGame();
 
@@ -27,10 +29,8 @@ function startGame() {
         cell.addEventListener('click', handleClick, { once: true });
     });
     setBoardHoverClass();
-    if (!OTurn) {
-        if (modeSelect.value === 'playerVsComputer') {
-        computerMove();
-        }
+    if (!OTurn && modeSelect.value === 'playerVsComputer' && !firstMoveMade) {
+        computerMoveTimeout = setTimeout(computerMove, 800);
     }
 }
 
@@ -77,6 +77,8 @@ function findWinningMove(a, b, c, playerClass) {
 function handleClick(e) {
     const cell = e.target;
     placeMark(cell, X_CLASS);
+    firstMoveMade = true;
+
     if (checkWin(X_CLASS)) {
         endGame(false);
     } else if (isDraw()) {
@@ -85,8 +87,12 @@ function handleClick(e) {
         swapTurns();
         setBoardHoverClass();
 
-        if (!OTurn && modeSelect.value === 'playerVsComputer') {
-            setTimeout(computerMove, 800);
+        
+        clearTimeout(computerMoveTimeout);
+
+    
+        if (modeSelect.value === 'playerVsComputer' && !OTurn && firstMoveMade) {
+            computerMoveTimeout = setTimeout(computerMove, 800);
         }
     }
 }
@@ -137,6 +143,7 @@ function checkWin(currentClass) {
 }
 
 restartBtn.addEventListener('click', () => {
+    firstMoveMade = false;
     startGame();
 });
 
@@ -149,22 +156,18 @@ document.addEventListener('keydown', function (event) {
 });
 
 function handleStartGame() {
-    const selectedMode = document.getElementById('gameMode').value;
-    if (selectedMode === 'playerVsComputer') {
-        startGame();
-        computerMove();
-    } else if (selectedMode === 'playerVsPlayer') {
-        startGame();
-    }
+    startGame();
+    firstMoveMade = false;
 }
 
 function handleRestart() {
     document.getElementById('notification').classList.add('hidden');
     document.getElementById('info').classList.remove('hidden');
     document.getElementById('options').classList.remove('hidden');
+    clearTimeout(computerMoveTimeout);
     startGame();
     const selectedMode = document.getElementById('gameMode').value;
-    if(selectedMode === 'playerVsComputer') {
+    if (selectedMode === 'playerVsComputer' && !OTurn && firstMoveMade) {
         computerMove();
     }
 }
