@@ -21,7 +21,8 @@ let firstMoveMade = false;
 startGame();
 
 function startGame() {
-    OTurn = false;
+    const selectedMode = document.getElementById('gameMode').value;
+    OTurn = selectedMode === 'playerVsPlayer' ? true : false;
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS);
         cell.classList.remove(O_CLASS);
@@ -31,7 +32,6 @@ function startGame() {
     });
     setBoardHoverClass();
 
-    const selectedMode = document.getElementById('gameMode').value;
     if (selectedMode === 'playerVsComputer' && !firstMoveMade) {
         computerMoveTimeout = setTimeout(computerMove, 800);
     }
@@ -79,7 +79,7 @@ function findWinningMove(a, b, c, playerClass) {
 
 function handleClickPlayerVsPlayer(e) {
     const cell = e.target;
-    placeMark(cell, OTurn ? O_CLASS : X_CLASS);
+    placeMark(cell, OTurn ? X_CLASS : O_CLASS);
 
     if (checkWin(X_CLASS) || checkWin(O_CLASS)) {
         endGame(false);
