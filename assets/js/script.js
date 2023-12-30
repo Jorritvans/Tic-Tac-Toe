@@ -25,11 +25,14 @@ function startGame() {
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS);
         cell.classList.remove(O_CLASS);
-        cell.removeEventListener('click', handleClick);
-        cell.addEventListener('click', handleClick, { once: true });
+        cell.removeEventListener('click', handleClickPlayerVsPlayer);
+        cell.removeEventListener('click', handleClickPlayerVsComputer);
+        cell.addEventListener('click', modeSelect.value === 'playerVsComputer' ? handleClickPlayerVsComputer : handleClickPlayerVsPlayer, { once: true });
     });
     setBoardHoverClass();
-    if (!OTurn && modeSelect.value === 'playerVsComputer' && !firstMoveMade) {
+
+    const selectedMode = document.getElementById('gameMode').value;
+    if (selectedMode === 'playerVsComputer' && !firstMoveMade) {
         computerMoveTimeout = setTimeout(computerMove, 800);
     }
 }
@@ -74,7 +77,21 @@ function findWinningMove(a, b, c, playerClass) {
     return undefined;
 }
 
-function handleClick(e) {
+function handleClickPlayerVsPlayer(e) {
+    const cell = e.target;
+    placeMark(cell, OTurn ? O_CLASS : X_CLASS);
+
+    if (checkWin(X_CLASS) || checkWin(O_CLASS)) {
+        endGame(false);
+    } else if (isDraw()) {
+        endGame(true);
+    } else {
+        swapTurns();
+        setBoardHoverClass();
+    }
+}
+
+function handleClickPlayerVsComputer(e) {
     const cell = e.target;
     placeMark(cell, X_CLASS);
     firstMoveMade = true;
@@ -87,16 +104,24 @@ function handleClick(e) {
         swapTurns();
         setBoardHoverClass();
 
-        
         clearTimeout(computerMoveTimeout);
 
-    
         if (modeSelect.value === 'playerVsComputer' && !OTurn && firstMoveMade) {
             computerMoveTimeout = setTimeout(computerMove, 800);
         }
     }
 }
 
+function findWinningMove(a, b, c, playerClass) {
+    const elements = [cellElements[a], cellElements[b], cellElements[c]];
+
+    if (elements.filter(element => element.classList.contains(playerClass)).length === 2 &&
+        elements.some(element => !element.classList.contains(X_CLASS) && !element.classList.contains(O_CLASS))) {
+        return elements.find(element => !element.classList.contains(X_CLASS) && !element.classList.contains(O_CLASS));
+    }
+
+    return undefined;
+}
 
 function endGame(draw) {
     const resultMessage = document.getElementById('resultMessage');
