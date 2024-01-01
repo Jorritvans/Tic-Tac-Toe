@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div>
+    <header>
         <h1>TIC TAC TOE</h1>
         <p id="info">
             Game starts by tapping on one of the boxes after the bot has placed their move!
@@ -30,8 +30,9 @@
             <b>Player X</b>
         </p>
         <br><br>
-    </div>
-
+    </header>
+    
+    <main>
     <div class="options" id="options">
         <label for="gameMode">Choose Game Mode:</label>
         <select id="gameMode" name="gameMode">
@@ -58,6 +59,7 @@
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
     </div>
+    </main>
 
     <!-- JS link-->
     <script src="assets/js/script.js"></script>

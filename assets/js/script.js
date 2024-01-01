@@ -112,17 +112,6 @@ function handleClickPlayerVsComputer(e) {
     }
 }
 
-function findWinningMove(a, b, c, playerClass) {
-    const elements = [cellElements[a], cellElements[b], cellElements[c]];
-
-    if (elements.filter(element => element.classList.contains(playerClass)).length === 2 &&
-        elements.some(element => !element.classList.contains(X_CLASS) && !element.classList.contains(O_CLASS))) {
-        return elements.find(element => !element.classList.contains(X_CLASS) && !element.classList.contains(O_CLASS));
-    }
-
-    return undefined;
-}
-
 function endGame(draw) {
     const resultMessage = document.getElementById('resultMessage');
     if (draw) {

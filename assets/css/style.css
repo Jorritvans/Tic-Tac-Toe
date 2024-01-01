@@ -25,14 +25,15 @@ h1 {
 
 #info {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 /* Making the board */
 .gameboard {
     max-width: 600px;
-    margin: 20px auto;
+    margin: 20px auto 0;
     display: grid;
-    position: fixed;
+    position: relative;
     justify-content: center;
     align-content: center;
     grid-template-columns: repeat(3, auto);
