@@ -128,9 +128,10 @@ function endGame(draw) {
 }
 
 function isDraw() {
-    return [...cellElements].every(cell => {
-        return cell.classList.contains(X_CLASS) && cell.classList.contains(O_CLASS);
+    const drawCondition = [...cellElements].every(cell => {
+        return cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS);
     });
+    return drawCondition;
 }
 
 function placeMark(cell, currentClass) {
