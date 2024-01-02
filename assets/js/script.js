@@ -118,9 +118,9 @@ function handleClickPlayerVsComputer(e) {
 function endGame(draw) {
     const resultMessage = document.getElementById('resultMessage');
     if (draw) {
-        resultMessage.textContent = 'The game is a draw!';
+        resultMessage.textContent = 'THE GAME IS A DRAW!';
     } else {
-        resultMessage.textContent = OTurn ? 'Player X has won!' : 'Player O has won!';
+        resultMessage.textContent = OTurn ? 'PLAYER X HAS WON!' : 'PLAYER O HAS WON!';
     }
     document.getElementById('notification').classList.remove('hidden');
     document.getElementById('info').classList.add('hidden');
@@ -189,3 +189,13 @@ function handleRestart() {
         computerMove();
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownBtn = document.getElementById('dropdownBtn');
+    const infoParagraph = document.getElementById('info');
+    infoParagraph.style.display = 'none';
+    dropdownBtn.addEventListener('click', function () {
+        infoParagraph.style.display = infoParagraph.style.display === 'none' ? 'block' : 'none';
+        dropdownBtn.innerHTML = infoParagraph.style.display === 'none' ? 'INFORMATION &#9662;' : 'INFORMATION &#9652;';
+    });
+});

@@ -40,17 +40,30 @@ footer {
 
 h1 {
     color: black;
+    text-align: center;
+    font-size: 36px;
 }
 
 #info {
+    display: none;
     text-align: center;
     margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.dropdown {
+    text-align: center;
+}
+
+#dropdownBtn {
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 /* Making the board */
 .gameboard {
     max-width: 600px;
-    margin: 80px auto;
+    margin: 150px auto;
     display: grid;
     position: relative;
     justify-content: center;
@@ -61,7 +74,7 @@ h1 {
 .cell {
     width: var(--cell-size);
     height: var(--cell-size);
-    border: 3px solid rgb(149, 245, 149);
+    border: 3px solid rgb(233, 78, 78);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,13 +145,13 @@ h1 {
 /* Creating the O */
 .cell.O::before,
 .cell.O::after {
-    background-color: rgb(224, 68, 68);
+    background-color: rgb(80, 207, 80);
 }
 
 /* adding the hover effect to O */
 .gameboard.O .cell:not(.X):not(.O):hover::before,
 .gameboard.O .cell:not(.X):not(.O):hover::after {
-    background-color:  rgb(241, 94, 94);
+    background-color:  rgb(122, 219, 122);
 }
 
 .cell.O::before,
@@ -160,7 +173,7 @@ h1 {
 .gameboard.O .cell:not(.X):not(.O):hover::after {
     width: calc(var(--mark-size) * .7);
     height: calc(var(--mark-size) *.7);
-    background-color: white;
+    background-color: black;
 }
 
 /* styles for the notification */
@@ -188,9 +201,12 @@ h1 {
 .options {
     text-align: center;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#startGameBtn,
+#gameMode,
 #restartBtn,
 #restartNotificationBtn {
     margin-top: 10px;

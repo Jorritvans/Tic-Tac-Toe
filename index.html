@@ -21,15 +21,39 @@
 <body>
     <header>
         <h1>TIC TAC TOE</h1>
+        <div class="dropdown">
+            <button id="dropdownBtn">INFORMATION &#9662;</button>
+        </div>
         <p id="info">
-            Game starts by tapping on one of the boxes after the bot has placed their move!
-            <br><br> **IMPORTANT**
-            <br><br>MAKE SURE THE BOT HAS PLACED THE O BEFORE YOU PLACE YOUR FIRST MOVE!
-            <br><br>The computer starts as
-            <b>Player O </b>And Second Player as
-            <b>Player X</b>
+            Welcome to Tic-Tac-Toe! This classic game is played by two players taking turns to mark a 3x3 grid. The
+            objective is to achieve a row, column, or diagonal with three of your marks (X or O).
+            <br><br>
+            <strong>Game Modes:</strong>
+            <br>
+            - Player vs. Player: Play against your friend on the same device.
+            <br>
+            - Player vs. Computer: Challenge the computer to test your skills.
+            <br><br>
+            <strong>How to Play:</strong>
+            <br>
+            Click on an empty cell to place your mark. The game alternates between X and O. In Player vs. Computer mode,
+            wait for the computer's move <strong>BEFORE</strong> making yours.
+            <br><br>
+            <strong>Winning:</strong>
+            <br>
+            Form a row, column, or diagonal with three of your marks to win. The game ends in a draw if the board is filled
+            without a winner.
+            <br><br>
+            <strong>Controls:</strong>
+            <br>
+            - Click on a cell to make a move.
+            <br>
+            - Use the "Restart Game" button to start a new game.
+            <br>
+            -You can also restart when clicking the "ENTER" button when a game has finished.
+            <br><br>
+            Enjoy the game and may the best player win!
         </p>
-        <br><br>
     </header>
     
     <main>
@@ -37,8 +61,9 @@
         <label for="gameMode">Choose Game Mode:</label>
         <select id="gameMode" name="gameMode">
             <option value="playerVsComputer">Play against the Computer</option>
-            <option value="playerVsPlayer">Play against your friend!</option>
+            <option value="playerVsPlayer">Play against your Friend!</option>
         </select>
+        <br>
         <button id="restartBtn">Restart Game</button>
     </div>
 
