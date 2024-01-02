@@ -15,12 +15,31 @@
 
 /* basic css */
 body {
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+header {
+    background-color: rgb(245, 245, 167);
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    text-align: center;
+    flex: 1;
+}
+
+footer {
+    background-color: rgb(250, 214, 148);
+    padding: 10px;
+    text-align: center;
 }
 
 h1 {
     color: black;
-    text-align: center;
 }
 
 #info {
@@ -31,7 +50,7 @@ h1 {
 /* Making the board */
 .gameboard {
     max-width: 600px;
-    margin: 20px auto 0;
+    margin: 80px auto;
     display: grid;
     position: relative;
     justify-content: center;
@@ -42,7 +61,7 @@ h1 {
 .cell {
     width: var(--cell-size);
     height: var(--cell-size);
-    border: 1px solid black;
+    border: 3px solid rgb(149, 245, 149);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,13 +98,13 @@ h1 {
 
 .cell.X::before,
 .cell.X::after {
-    background-color: green;
+    background-color: rgb(0, 153, 255);
 }
 
 /* adding a hover effect */
 .gameboard.X .cell:not(.X):not(.O):hover::before,
 .gameboard.X .cell:not(.X):not(.O):hover::after {
-    background-color: lightgreen;
+    background-color: lightskyblue;
 }
 
 /* making the X */
@@ -113,13 +132,13 @@ h1 {
 /* Creating the O */
 .cell.O::before,
 .cell.O::after {
-    background-color: blue;
+    background-color: rgb(224, 68, 68);
 }
 
 /* adding the hover effect to O */
 .gameboard.O .cell:not(.X):not(.O):hover::before,
 .gameboard.O .cell:not(.X):not(.O):hover::after {
-    background-color: lightblue;
+    background-color:  rgb(241, 94, 94);
 }
 
 .cell.O::before,
