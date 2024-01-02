@@ -19,10 +19,11 @@ body {
     flex-direction: column;
     min-height: 100vh;
     overflow: hidden;
+    background-color: black;
 }
 
 header {
-    background-color: rgb(245, 245, 167);
+    background-color: white;
     padding: 20px;
     text-align: center;
 }
@@ -33,7 +34,7 @@ main {
 }
 
 footer {
-    background-color: rgb(250, 214, 148);
+    background-color: white;
     padding: 10px;
     text-align: center;
 }
@@ -229,5 +230,12 @@ h1 {
 
     #notification {
         width: 80%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: black;
     }
 }
