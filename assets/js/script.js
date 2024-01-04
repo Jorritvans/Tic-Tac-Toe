@@ -45,19 +45,29 @@ function computerMove() {
     
     for (const combination of WINNING_COMBINATIONS) {
         const [a, b, c] = combination;
-        const potentialWinningMove = findWinningMove(a, b, c, playerClass);
+        const potentialWinningMove = findWinningMove(a, b, c, computerClass);
         if (potentialWinningMove !== undefined && availableCells.includes(potentialWinningMove)) {
-            placeMark(potentialWinningMove, computerClass);
-            swapTurns();
-            setBoardHoverClass();
+            makeComputerMove(potentialWinningMove, computerClass);
             return;
         }
     }
 
-    
+    for (const combination of WINNING_COMBINATIONS) {
+        const [a, b, c] = combination;
+        const potentialBlockMove = findWinningMove(a, b, c, playerClass);
+        if (potentialBlockMove !== undefined && availableCells.includes(potentialBlockMove)) {
+            makeComputerMove(potentialBlockMove, computerClass);
+            return;
+        }
+    }
+
     const randomIndex = Math.floor(Math.random() * availableCells.length);
     const computerCell = availableCells[randomIndex];
-    placeMark(computerCell, computerClass);
+    makeComputerMove(computerCell, computerClass);
+}
+
+function makeComputerMove(cell, computerClass) {
+    placeMark(cell, computerClass);
 
     if (checkWin(computerClass)) {
         endGame(false);
@@ -71,9 +81,12 @@ function computerMove() {
 
 function findWinningMove(a, b, c, playerClass) {
     const elements = [cellElements[a], cellElements[b], cellElements[c]];
+    const opponentClass = playerClass === X_CLASS ? O_CLASS : X_CLASS;
 
-    if (elements.filter(element => element.classList.contains(playerClass)).length === 2 &&
-        elements.some(element => !element.classList.contains(X_CLASS) && !element.classList.contains(O_CLASS))) {
+    const playerCount = elements.filter(element => element.classList.contains(playerClass)).length;
+    const opponentCount = elements.filter(element => element.classList.contains(opponentClass)).length;
+
+    if (playerCount === 2 && opponentCount === 0) {
         return elements.find(element => !element.classList.contains(X_CLASS) && !element.classList.contains(O_CLASS));
     }
 
