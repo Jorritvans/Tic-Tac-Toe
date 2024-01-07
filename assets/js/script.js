@@ -1,3 +1,4 @@
+/**  Constants representing X and O classes, and winning combinations */
 const X_CLASS = 'X';
 const O_CLASS = 'O';
 const WINNING_COMBINATIONS = [
@@ -10,19 +11,56 @@ const WINNING_COMBINATIONS = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+
+/**  DOM elements */
 const cellElements = document.querySelectorAll('[data-cell]');
 const board = document.getElementById('gameboard');
 const restartBtn = document.getElementById('restartBtn');
 const modeSelect = document.getElementById('gameMode');
+
+/** Game state variables */
 let OTurn;
 let computerMoveTimeout;
 let firstMoveMade = false;
 
+
+/** Initialize the game */
 startGame();
 
+/* Initialize dropdown button */
+initDropdownButton();
+
+
+/** event listener restart */
+restartBtn.addEventListener('click', handleRestart);
+document.getElementById('restartNotificationBtn').addEventListener('click', handleRestart);
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        handleRestart();
+    }
+});
+
+
+/** Function to initialize the dropdown button */
+function initDropdownButton() {
+    const dropdownBtn = document.getElementById('dropdownBtn');
+    const infoParagraph = document.getElementById('info');
+    infoParagraph.style.display = 'none';
+    dropdownBtn.addEventListener('click', function () {
+        infoParagraph.style.display = infoParagraph.style.display === 'none' ? 'block' : 'none';
+        dropdownBtn.innerHTML = infoParagraph.style.display === 'none' ? 'INFORMATION &#9662;' : 'INFORMATION &#9652;';
+    });
+};
+
+
+/** Function to initialize the game */
 function startGame() {
     const selectedMode = document.getElementById('gameMode').value;
+
+    /** Determine if it's player vs player or player vs computer */
     OTurn = selectedMode === 'playerVsPlayer' ? true : false;
+
+    /** Remove previous classes, event listeners, and add new ones */
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS);
         cell.classList.remove(O_CLASS);
@@ -30,6 +68,8 @@ function startGame() {
         cell.removeEventListener('click', handleClickPlayerVsComputer);
         cell.addEventListener('click', modeSelect.value === 'playerVsComputer' ? handleClickPlayerVsComputer : handleClickPlayerVsPlayer, { once: true });
     });
+
+    /** Set initial hover class and handle first move for player vs computer */
     setBoardHoverClass();
 
     if (selectedMode === 'playerVsComputer' && !firstMoveMade) {
@@ -37,12 +77,17 @@ function startGame() {
     }
 }
 
+
+/** Function to handle computer's move */
 function computerMove() {
+    /** Player and computer class */
     const playerClass = X_CLASS;
     const computerClass = O_CLASS;
+
+    /** Filter available cells */
     const availableCells = [...cellElements].filter(cell => !cell.classList.contains(X_CLASS) && !cell.classList.contains(O_CLASS));
 
-    
+    /** Check for winning move or blocking move */
     for (const combination of WINNING_COMBINATIONS) {
         const [a, b, c] = combination;
         const potentialWinningMove = findWinningMove(a, b, c, computerClass);
@@ -61,14 +106,19 @@ function computerMove() {
         }
     }
 
+
+    /** If no winning or blocking move, make a random move */
     const randomIndex = Math.floor(Math.random() * availableCells.length);
     const computerCell = availableCells[randomIndex];
     makeComputerMove(computerCell, computerClass);
 }
 
+
+/** Function to make the computer's move */
 function makeComputerMove(cell, computerClass) {
     placeMark(cell, computerClass);
 
+    /** Check for win or draw, swap turns, and set hover class */
     if (checkWin(computerClass)) {
         endGame(false);
     } else if (isDraw()) {
@@ -79,6 +129,8 @@ function makeComputerMove(cell, computerClass) {
     }
 }
 
+
+/** Function to find a winning move or blocking move */
 function findWinningMove(a, b, c, playerClass) {
     const elements = [cellElements[a], cellElements[b], cellElements[c]];
     const opponentClass = playerClass === X_CLASS ? O_CLASS : X_CLASS;
@@ -93,10 +145,14 @@ function findWinningMove(a, b, c, playerClass) {
     return undefined;
 }
 
+
+/** Function to handle click in player vs player mode*/
 function handleClickPlayerVsPlayer(e) {
     const cell = e.target;
     placeMark(cell, OTurn ? X_CLASS : O_CLASS);
 
+
+    /** Check for win or draw, swap turns, and set hover class */
     if (checkWin(X_CLASS) || checkWin(O_CLASS)) {
         endGame(false);
     } else if (isDraw()) {
@@ -107,11 +163,14 @@ function handleClickPlayerVsPlayer(e) {
     }
 }
 
+
+/** Function to handle click in player vs computer mode */
 function handleClickPlayerVsComputer(e) {
     const cell = e.target;
     placeMark(cell, X_CLASS);
     firstMoveMade = true;
 
+    /** Check for win or draw, swap turns, set hover class, and handle computer move */
     if (checkWin(X_CLASS)) {
         endGame(false);
     } else if (isDraw()) {
@@ -128,6 +187,8 @@ function handleClickPlayerVsComputer(e) {
     }
 }
 
+
+/** Function to end the game */
 function endGame(draw) {
     const resultMessage = document.getElementById('resultMessage');
     if (draw) {
@@ -140,6 +201,8 @@ function endGame(draw) {
     document.getElementById('options').classList.add('hidden');
 }
 
+
+/** Function to check if the game is a draw */
 function isDraw() {
     const drawCondition = [...cellElements].every(cell => {
         return cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS);
@@ -147,14 +210,20 @@ function isDraw() {
     return drawCondition;
 }
 
+
+/** Function to place a mark on the board*/
 function placeMark(cell, currentClass) {
     cell.classList.add(currentClass);
 }
 
+
+/** Function to swap turns */
 function swapTurns() {
     OTurn = !OTurn;
 }
 
+
+/** Function to set the hover class on the board*/
 function setBoardHoverClass() {
     board.classList.remove(X_CLASS, O_CLASS);
 
@@ -165,6 +234,8 @@ function setBoardHoverClass() {
     }
 }
 
+
+/** Function to check for a win */
 function checkWin(currentClass) {
     return WINNING_COMBINATIONS.some(combination => {
         return combination.every(index => {
@@ -173,24 +244,15 @@ function checkWin(currentClass) {
     });
 }
 
-restartBtn.addEventListener('click', () => {
-    firstMoveMade = false;
-    startGame();
-});
 
-document.getElementById('restartNotificationBtn').addEventListener('click', handleRestart);
-
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        handleRestart();
-    }
-});
-
+/** Event listeners for restart button and restart notification button */
 function handleStartGame() {
     startGame();
     firstMoveMade = false;
 }
 
+
+/** Function to handle starting the game */
 function handleRestart() {
     document.getElementById('notification').classList.add('hidden');
     document.getElementById('info').classList.remove('hidden');
@@ -202,13 +264,3 @@ function handleRestart() {
         computerMove();
     }
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    const dropdownBtn = document.getElementById('dropdownBtn');
-    const infoParagraph = document.getElementById('info');
-    infoParagraph.style.display = 'none';
-    dropdownBtn.addEventListener('click', function () {
-        infoParagraph.style.display = infoParagraph.style.display === 'none' ? 'block' : 'none';
-        dropdownBtn.innerHTML = infoParagraph.style.display === 'none' ? 'INFORMATION &#9662;' : 'INFORMATION &#9652;';
-    });
-});
