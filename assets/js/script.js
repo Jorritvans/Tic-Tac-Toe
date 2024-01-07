@@ -245,13 +245,6 @@ function checkWin(currentClass) {
 }
 
 
-/** Event listeners for restart button and restart notification button */
-function handleStartGame() {
-    startGame();
-    firstMoveMade = false;
-}
-
-
 /** Function to handle starting the game */
 function handleRestart() {
     document.getElementById('notification').classList.add('hidden');
