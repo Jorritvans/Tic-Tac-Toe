@@ -102,6 +102,16 @@ h1 {
     background-color: #2e7d32;
 }
 
+#restartBtn {
+    text-align: center;
+    margin-top: -20px;
+    position: relative;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* Making the board */
 .gameboard {
     max-width: 600px;
@@ -255,6 +265,8 @@ h1 {
 .options {
     text-align: center;
     margin-top: -20px;
+    position: relative;
+    top: -30px;
     display: flex;
     flex-direction: column;
     align-items: center;
