@@ -202,7 +202,7 @@ function endGame(draw) {
     } else {
         resultMessage.textContent = oTurn ? 'PLAYER X HAS WON!' : 'PLAYER O HAS WON!';
         resultMessage.style.fontSize = '24px';
-        notification.style.backgroundColor = oTurn ? 'rgb(0, 153, 255)' : 'rgb(80, 207, 80)';
+        notification.style.backgroundColor = oTurn ? 'rgba(39, 191, 245, 0.8)' : 'rgba(36, 171, 15, 0.8)';
     }
     document.getElementById('notification').classList.remove('hidden');
     document.getElementById('info').classList.add('hidden');
