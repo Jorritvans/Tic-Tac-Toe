@@ -86,8 +86,9 @@ h1 {
 
 #dropdownBtn {
     padding: 15px 10px;
+    font-size: 20px;
     cursor: pointer;
-    background-color: #4caf50;
+    background-color: rgba(8, 111, 43, 1);
     color: #ffffff;
     border: 2px solid #388e3c;
     border-radius: 5px;
@@ -276,10 +277,10 @@ h1 {
 #restartNotificationBtn {
     margin-top: 10px;
     padding: 10px 20px;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     display: inline-block;
-    background-color: rgb(233, 78, 78);
+    background-color: rgba(202, 51, 18, 1);
     color: #ffffff;
     border: 2px solid #d32f2f;
     border-radius: 5px;
@@ -301,10 +302,10 @@ h1 {
 #gameMode {
     margin-top: 10px;
     padding: 10px 20px;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     display: inline-block;
-    background-color: #2196f3;
+    background-color: #0d47a1;
     color: #ffffff;
     border: 2px solid #1565c0;
     border-radius: 5px;
