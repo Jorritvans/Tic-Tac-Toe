@@ -19,15 +19,15 @@ const restartBtn = document.getElementById('restartBtn');
 const modeSelect = document.getElementById('gameMode');
 
 /** Game state variables */
-let OTurn;
+let oTurn;
 let computerMoveTimeout;
 let firstMoveMade = false;
-
+let gameInProgress = true;
 
 /** Initialize the game */
 startGame();
 
-/* Initialize dropdown button */
+/** Initialize dropdown button */
 initDropdownButton();
 
 
@@ -58,7 +58,7 @@ function startGame() {
     const selectedMode = document.getElementById('gameMode').value;
 
     /** Determine if it's player vs player or player vs computer */
-    OTurn = selectedMode === 'playerVsPlayer' ? true : false;
+    oTurn = selectedMode === 'playerVsPlayer' ? true : false;
 
     /** Remove previous classes, event listeners, and add new ones */
     cellElements.forEach(cell => {
@@ -75,6 +75,8 @@ function startGame() {
     if (selectedMode === 'playerVsComputer' && !firstMoveMade) {
         computerMoveTimeout = setTimeout(computerMove, 800);
     }
+
+    gameInProgress = true;
 }
 
 
@@ -148,8 +150,9 @@ function findWinningMove(a, b, c, playerClass) {
 
 /** Function to handle click in player vs player mode*/
 function handleClickPlayerVsPlayer(e) {
+    if (!gameInProgress) return;
     const cell = e.target;
-    placeMark(cell, OTurn ? X_CLASS : O_CLASS);
+    placeMark(cell, oTurn ? X_CLASS : O_CLASS);
 
 
     /** Check for win or draw, swap turns, and set hover class */
@@ -166,6 +169,7 @@ function handleClickPlayerVsPlayer(e) {
 
 /** Function to handle click in player vs computer mode */
 function handleClickPlayerVsComputer(e) {
+    if (!gameInProgress) return;
     const cell = e.target;
     placeMark(cell, X_CLASS);
     firstMoveMade = true;
@@ -181,7 +185,7 @@ function handleClickPlayerVsComputer(e) {
 
         clearTimeout(computerMoveTimeout);
 
-        if (modeSelect.value === 'playerVsComputer' && !OTurn && firstMoveMade) {
+        if (modeSelect.value === 'playerVsComputer' && !oTurn && firstMoveMade) {
             computerMoveTimeout = setTimeout(computerMove, 800);
         }
     }
@@ -193,12 +197,18 @@ function endGame(draw) {
     const resultMessage = document.getElementById('resultMessage');
     if (draw) {
         resultMessage.textContent = 'THE GAME IS A DRAW!';
+        resultMessage.style.fontSize = '24px';
+        notification.style.backgroundColor = 'rgba(174, 39, 245, 0.8)';
     } else {
-        resultMessage.textContent = OTurn ? 'PLAYER X HAS WON!' : 'PLAYER O HAS WON!';
+        resultMessage.textContent = oTurn ? 'PLAYER X HAS WON!' : 'PLAYER O HAS WON!';
+        resultMessage.style.fontSize = '24px';
+        notification.style.backgroundColor = oTurn ? 'rgb(0, 153, 255)' : 'rgb(80, 207, 80)';
     }
     document.getElementById('notification').classList.remove('hidden');
     document.getElementById('info').classList.add('hidden');
     document.getElementById('options').classList.add('hidden');
+
+    gameInProgress = false;
 }
 
 
@@ -219,7 +229,7 @@ function placeMark(cell, currentClass) {
 
 /** Function to swap turns */
 function swapTurns() {
-    OTurn = !OTurn;
+    oTurn = !oTurn;
 }
 
 
@@ -227,7 +237,7 @@ function swapTurns() {
 function setBoardHoverClass() {
     board.classList.remove(X_CLASS, O_CLASS);
 
-    if (OTurn) {
+    if (oTurn) {
         board.classList.add(X_CLASS);
     } else {
         board.classList.add(O_CLASS);
@@ -253,7 +263,7 @@ function handleRestart() {
     clearTimeout(computerMoveTimeout);
     startGame();
     const selectedMode = document.getElementById('gameMode').value;
-    if (selectedMode === 'playerVsComputer' && !OTurn && firstMoveMade) {
+    if (selectedMode === 'playerVsComputer' && !oTurn && firstMoveMade) {
         computerMove();
     }
 }

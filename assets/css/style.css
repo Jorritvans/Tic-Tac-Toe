@@ -24,7 +24,7 @@ body {
 
 header {
     background-color: white;
-    padding: 0;
+    padding: 20px 0;
     margin: 0;
     text-align: center;
 }
@@ -32,7 +32,7 @@ header {
 main {
     text-align: center;
     flex: 1;
-    margin: 0;
+    margin-top: 20px;
 }
 
 footer {
@@ -45,31 +45,68 @@ footer {
 h1 {
     color: black;
     text-align: center;
-    font-size: 36px;
+    font-size: 50px;
 }
 
 #info {
     display: none;
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #333;
+    padding-left: 10px;
 }
 
 .dropdown {
     text-align: center;
 }
 
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content p {
+    padding: 10px;
+    margin: 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 #dropdownBtn {
-    padding: 5px 10px;
+    padding: 15px 10px;
     cursor: pointer;
+    background-color: #4caf50;
+    color: #ffffff;
+    border: 2px solid #388e3c;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#dropdownBtn:hover {
+    background-color: #388e3c;
+}
+
+#dropdownBtn:active {
+    background-color: #2e7d32;
 }
 
 /* Making the board */
 .gameboard {
     max-width: 600px;
-    margin: 150px auto;
+    margin: 0 auto;
     display: grid;
-    position: relative;
     justify-content: center;
     align-content: center;
     grid-template-columns: repeat(3, auto);
@@ -180,20 +217,33 @@ h1 {
     background-color: black;
 }
 
+
 /* styles for the notification */
 #notification {
+    max-width: 400px;
+    width: auto;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: fixed;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 2px solid black;
+    padding: 30px;
+    border: 4px solid rgb(233, 78, 78);
     z-index: 2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#notification p {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+#restartNotificationBtn {
+    padding: 12px 24px;
+    font-size: 18px;
 }
 
 #notification.hidden {
@@ -210,14 +260,51 @@ h1 {
     align-items: center;
 }
 
-#gameMode,
 #restartBtn,
 #restartNotificationBtn {
     margin-top: 10px;
-    padding: 5px 10px;
-    font-size: 16px;
+    padding: 10px 20px;
+    font-size: 18px;
     cursor: pointer;
     display: inline-block;
+    background-color: rgb(233, 78, 78);
+    color: #ffffff;
+    border: 2px solid #d32f2f;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+#restartBtn:hover,
+#restartNotificationBtn:hover {
+    background-color: #c62828;
+    border-color: #b71c1c;
+}
+
+#restartBtn:active,
+#restartNotificationBtn:active {
+    background-color: #b71c1c;
+    border-color: #8e1a1a;
+}
+
+#gameMode {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #2196f3;
+    color: #ffffff;
+    border: 2px solid #1565c0;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#gameMode:hover {
+    background-color: #1565c0;
+}
+
+#gameMode:active {
+    background-color: #0d47a1;
 }
 
 #resultMessage {
@@ -255,7 +342,7 @@ h1 {
 @media only screen and (max-width: 600px) {
     .gameboard {
         max-width: 80vw;
-        margin: 20px auto 0;
+        margin: 20px auto 40px;
     }
 
     .options {
@@ -281,15 +368,17 @@ h1 {
 @media screen and (min-width: 768px) {
     .gameboard {
         max-width: 600px;
-        margin: 180px auto;
+        margin: 60px auto;
         display: grid;
-        position: relative;
         justify-content: center;
         align-content: center;
         grid-template-columns: repeat(3, auto);
     }
     .options {
         margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     
     label[for="gameMode"] {
