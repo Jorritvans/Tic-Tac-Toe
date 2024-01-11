@@ -196,7 +196,7 @@ function handleClickPlayerVsComputer(e) {
 function endGame(draw) {
     const resultMessage = document.getElementById('resultMessage');
     if (draw) {
-        resultMessage.textContent = 'DRAW!';
+        resultMessage.textContent = 'DRA!';
         resultMessage.style.fontSize = '24px';
         notification.style.backgroundColor = 'rgba(255, 252, 0, 0.8)';
     } else {
