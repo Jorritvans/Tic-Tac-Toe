@@ -198,7 +198,7 @@ function endGame(draw) {
     if (draw) {
         resultMessage.textContent = 'THE GAME IS A DRAW!';
         resultMessage.style.fontSize = '24px';
-        notification.style.backgroundColor = 'rgba(174, 39, 245, 0.8)';
+        notification.style.backgroundColor = 'rgba(255, 252, 0, 0.8)';
     } else {
         resultMessage.textContent = oTurn ? 'PLAYER X HAS WON!' : 'PLAYER O HAS WON!';
         resultMessage.style.fontSize = '24px';
